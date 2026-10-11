@@ -62,3 +62,7 @@ The local server serves the latest files without a build step. Reload the page t
 ## Theme
 
 The navigation includes an accessible dark-mode toggle. First visits follow the operating-system preference; an explicit choice is saved in localStorage and applied in the head before styles load. Cross-tab changes are reflected, and unavailable storage falls back to an in-memory choice. A circular theme reveal uses the View Transitions API where available, with a normal color transition elsewhere. Reduced-motion settings skip the animated reveal.
+
+## Ubuntu hosting
+
+Static deployment preparation and verification steps are in [docs/UBUNTU_HOSTING.md](docs/UBUNTU_HOSTING.md). The Nginx example in `deploy/` is a template pending inspection of the existing Twin Palm server and selection of a portfolio hostname.
