@@ -1,4 +1,4 @@
-# Chimwemwe Masona — Portfolio
+# Chimwemwe Masona â€” Portfolio
 
 Personal portfolio showcasing software projects across agriculture, business operations, and community websites.
 
@@ -65,4 +65,8 @@ The navigation includes an accessible dark-mode toggle. First visits follow the 
 
 ## Ubuntu hosting
 
-Live at http://95.217.214.201:8081/. A separate, automatically restarting Nginx container serves the static files alongside Twin Palm. Deployment details, update steps, and rollback are in [docs/UBUNTU_HOSTING.md](docs/UBUNTU_HOSTING.md). All eight public assets were verified against local SHA-256 checksums. A domain and HTTPS are not configured yet.
+Live at https://95.217.214.201/. HTTP on port 8081 redirects to HTTPS. A separate, automatically restarting Nginx container serves the static files alongside Twin Palm. Deployment details, update steps, and rollback are in [docs/UBUNTU_HOSTING.md](docs/UBUNTU_HOSTING.md). All eight public assets were verified against local SHA-256 checksums. The IP certificate is self-signed; browsers require explicit trust. A custom domain is not configured.
+
+## CI/CD
+
+GitHub Actions validates pull requests and deploys successful pushes to main through a restricted SSH key, with checksum verification, atomic release activation, and rollback. Set the one-time `PORTFOLIO_DEPLOY_KEY` Actions secret to activate deployment. See [docs/CI_CD.md](docs/CI_CD.md).

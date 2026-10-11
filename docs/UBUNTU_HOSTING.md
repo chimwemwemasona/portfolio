@@ -1,8 +1,9 @@
 # Ubuntu hosting
 
-Live portfolio: http://95.217.214.201:8081/
+Live portfolio: https://95.217.214.201/
+HTTP portfolio: http://95.217.214.201:8081/ redirects to HTTPS
 Deployment date: 11 October 2026
-Static source snapshot: `25ac8cd800688fdc1e84fda61ee9c7d040a8bc3c`
+Initial static snapshot: `25ac8cd800688fdc1e84fda61ee9c7d040a8bc3c`. The server-side `deployment.json` records later releases.
 
 ## Server and service
 
@@ -30,7 +31,17 @@ Nginx runs as UID/GID 101, with a read-only root filesystem and read-only site/c
 - Twin Palm returned HTTP 200 on its existing address before and after deployment. Its application and host configuration were not edited.
 - Browser visual/interaction checks remain pending due to the local browser limitation.
 
-This deployment uses HTTP on a separate port. A custom domain and HTTPS have not been configured.
+HTTPS is served by a separate `chimwemwe-portfolio-tls` container on host port 443 to container port 8443. The original container on port 8081 redirects visitors to HTTPS. Both use the same read-only site root and automatically restart.
+
+The common Nginx configuration includes `/certs/*.nginx.conf` when present. Only the TLS container mounts `/home/chimwemwe/apps/chimwemwe-portfolio-tls` at `/certs`; the HTTP container has no certificate mount. The TLS container adds supplementary group 1000 to read the key. The directory is mode 750 and key mode 640. The private key stays on the server, outside the public site.
+
+The certificate is self-signed, with `IP:95.217.214.201` in its subject alternative name. It expires on 11 October 2027. Browsers show a trust warning until the public certificate is explicitly trusted. The public certificate is provided at `deploy/portfolio-certificate.crt`; its private key is never committed. A custom domain is not configured.
+
+Nginx has been validated in both containers. Public HTTPS checks verified every asset against local SHA-256 checksums while trusting this certificate and validating its IP name. HTTP redirect and Twin Palm availability checks passed. The stopped/replacement container approach was rejected by automatic approval review, so HTTPS was added without replacing the original container.
+
+## Automatic deployment
+
+See [CI_CD.md](CI_CD.md) for the GitHub Actions workflow and one-time secret setup. A successful push to main deploys static content through the restricted SSH handler. The procedure below remains available for administrative updates.
 
 ## Future content updates
 
@@ -50,18 +61,22 @@ Run these on the server:
 docker ps --filter name=chimwemwe-portfolio
 docker logs --tail 30 chimwemwe-portfolio
 docker exec chimwemwe-portfolio nginx -t
-curl -I http://127.0.0.1:8081/
+docker exec chimwemwe-portfolio-tls nginx -t
+curl --cacert /home/chimwemwe/apps/chimwemwe-portfolio-tls/portfolio.crt -I https://95.217.214.201/
+curl -I http://95.217.214.201:8081/
 curl -I http://127.0.0.1/
 ```
 
 ## Rollback
 
-For later releases, atomically switch `current` to the recorded previous release and recheck the public assets. To take this initial portfolio deployment offline, use `docker stop chimwemwe-portfolio`; the `unless-stopped` policy keeps it stopped. `docker start chimwemwe-portfolio` restores it. Neither command affects Twin Palm.
+For later releases, atomically switch `current` to the recorded previous release and recheck the public assets. To take the portfolio offline, stop both `chimwemwe-portfolio` and `chimwemwe-portfolio-tls`; the `unless-stopped` policy keeps them stopped. Starting those two containers restores it. These commands do not affect Twin Palm.
 
-## Domain and HTTPS follow-up
+## Certificate renewal and domain follow-up
 
-Choose a hostname and point its DNS A record to `95.217.214.201`. Then add a dedicated virtual host to the existing host Nginx, proxying only that hostname to `127.0.0.1:8081`, and provision HTTPS with the server's certificate tooling. Root-owned host configuration requires an interactive sudo step with the current account. After HTTPS is verified, the container can be recreated with its published port bound to loopback. Inspect existing virtual hosts and validate Nginx before any reload.
+Before 11 October 2027, issue a new self-signed certificate/key on the server with the IP SAN, preserve the 750 directory/640 key permissions, write files in place, validate and reload only the TLS container. Retain the old pair for recovery. Update the public certificate in this repository and any client trust stores. The deployment handler reads the server certificate as its trust anchor.
 
-The original `deploy/portfolio.nginx.conf.example` remains an alternative template for serving files directly through host Nginx. It is not the configuration used by this deployment.
+For a publicly trusted certificate, choose a domain and DNS A record pointing to the server, then configure that name and a CA-issued certificate. Inspect the existing listener on 443 before changing routing. Host Nginx remains responsible for Twin Palm on port 80.
+
+The `deploy/portfolio.nginx.conf.example` file is an alternative host-Nginx template; it is not active. Current configs are `deploy/portfolio-container.nginx.conf` and `deploy/portfolio-https.nginx.conf`.
 
 References: https://hub.docker.com/_/nginx and https://docs.docker.com/engine/containers/run/

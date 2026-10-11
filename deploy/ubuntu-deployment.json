@@ -1,13 +1,19 @@
 {
-  "url": "http://95.217.214.201:8081/",
+  "url": "https://95.217.214.201/",
   "host": "95.217.214.201",
   "ssh_user": "chimwemwe",
   "ssh_port": 22,
   "container": "chimwemwe-portfolio",
   "image": "nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94",
   "root": "/home/chimwemwe/apps/chimwemwe-portfolio",
-  "release": "25ac8cd800688fdc1e84fda61ee9c7d040a8bc3c",
+  "release": "8e35a287cb6f28b3b10802523ba130d98e1c858a",
   "host_port": 8081,
   "container_port": 8080,
-  "deployed_date": "2026-10-11"
+  "deployed_date": "2026-10-11",
+  "http_url": "http://95.217.214.201:8081/",
+  "tls_container": "chimwemwe-portfolio-tls",
+  "https_host_port": 443,
+  "https_container_port": 8443,
+  "tls_root": "/home/chimwemwe/apps/chimwemwe-portfolio-tls",
+  "certificate_expires": "2027-10-11T18:17:16Z"
 }

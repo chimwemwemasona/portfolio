@@ -1,4 +1,4 @@
-node_modules/
+ï»¿node_modules/
 .env
 .env.*
 !.env.example
@@ -9,3 +9,5 @@ coverage/
 Thumbs.db
 .openai/*.tar
 .openai/*.tar.gz
+
+__pycache__/
