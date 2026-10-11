@@ -7,7 +7,7 @@ Target: https://github.com/chimwemwemasona/portfolio
 
 ## Design
 
-A responsive editorial bento grid with an ivory background, oversized typography, forest green project cards, restrained citrus accents, and accessible motion.
+A responsive editorial grid with alternating emphasis: a wide Bizrail card beside Masona Farms, a compact Outgrower card beside a wider Twin Palm card, and equally sized Agritech Link and Kwena Homes cards. Tablet screens use equal columns; phones use one column. Ivory, forest green, citrus accents, oversized typography, and accessible motion carry the visual identity.
 
 ## Selected work
 
