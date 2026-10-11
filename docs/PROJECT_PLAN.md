@@ -6,7 +6,7 @@ Default branch: main
 ## Visitor experience
 
 1. Introduction with name and a project-grounded statement.
-2. A balanced grid with alternating wide cards and an equal-width final row, showcasing Bizrail Africa, Twin Palm, Outgrower OS, Masona Farms, Agritech Link, and Kwena Homes.
+2. A balanced grid with alternating wide cards and an equal-width final row, showcasing Kwena Homes, Twin Palm, Masona Farms, Bizrail Africa, Agritech Link, and Outgrower OS in that reading order. Hierarchy reflects implemented product breadth and integration depth.
 3. Project details explaining the problem, implemented approach, technology, and development status.
 4. About section based on verified projects.
 5. GitHub contact link.

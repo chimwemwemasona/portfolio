@@ -7,17 +7,20 @@ Target: https://github.com/chimwemwemasona/portfolio
 
 ## Design
 
-A responsive editorial grid with alternating emphasis: a wide Bizrail card beside Masona Farms, a compact Outgrower card beside a wider Twin Palm card, and equally sized Agritech Link and Kwena Homes cards. Tablet screens use equal columns; phones use one column. Ivory, forest green, citrus accents, oversized typography, and accessible motion carry the visual identity.
+A responsive editorial grid with alternating emphasis: Kwena Homes beside Twin Palm, Masona Farms beside a wider Bizrail card, and equally sized Agritech Link and Outgrower OS cards. Tablet screens use equal columns; phones use one column. Ivory, forest green, citrus accents, oversized typography, and accessible motion carry the visual identity.
 
 ## Selected work
 
-- Bizrail Africa: an offline-first SME workspace using Next.js, NestJS, and PostgreSQL. https://github.com/chimwemwemasona/Bizrail_Africa
-- Twin Palm website and CMS: React, TypeScript, Vite, shadcn/ui, and Tailwind CSS. Live website: http://95.217.214.201/. Repository: https://github.com/chimwemwemasona/tpbc_prod
-- Outgrower OS: a prototype for smallholder farming production and procurement workflows. Source remains private.
-- Masona Farms: a React Native Android farm-management app with SQLite records. Source remains private.
+Ordered by an editorial assessment of implemented product breadth, completed workflows, and integration depth. Deployment is considered separately from scope; this is not a quality score or a claim that every project is production-ready.
 
-- Agritech Link: a Flutter/Dart farmer-focused app with a Supabase-backed produce marketplace and crop-analysis workflows. https://github.com/agritech-link/app_v1
-- Kwena Homes: work on a React Native/Expo property-discovery app with maps, saved homes, and listing workflows. https://github.com/Nile-Living/kwena_homes_mobile
+1. Kwena Homes: property discovery, maps, saved homes, listing management, authentication, and subscription/promotion screens. React Native/Expo. https://github.com/Nile-Living/kwena_homes_mobile
+2. Twin Palm: public community website and authenticated CMS for sermons, blogs, media, Bible study, and other content. React/TypeScript. Live: http://95.217.214.201/. Source: https://github.com/chimwemwemasona/tpbc_prod
+3. Masona Farms: offline farm records, financial summaries, crop calendar/guidance, photos, notifications, and report exports. React Native/SQLite. https://github.com/chimwemwemasona/Masona-Farms
+4. Bizrail Africa: technically deep Phase 1 SME workspace with offline capture, ledger, inventory, sync, and recovery. Next.js/NestJS/PostgreSQL. https://github.com/chimwemwemasona/Bizrail_Africa
+5. Agritech Link: produce marketplace, cart/order workflows, crop-analysis integration, and weather services. Flutter/Dart/Supabase. https://github.com/agritech-link/app_v1
+6. Outgrower OS: early production/procurement prototype; later business modules remain planned. React/Go. https://github.com/chimwemwemasona/Outgrower-OS
+
+All six source repositories are public. Project dialogs retain their individual implementation and deployment status.
 
 ## Milestones
 
