@@ -7,3 +7,5 @@ body,.nav,footer,dialog,.skills span,.hero-bottom p,.about p,dialog p,.contact p
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}::view-transition-new(root){z-index:2}::view-transition-old(root){z-index:1}
 @media(max-width:560px){.theme-toggle{width:34px;height:34px}.nav nav{gap:12px}}
 @media(prefers-reduced-motion:reduce){.theme-icon,.theme-toggle,body,.nav,footer,dialog,.skills span,.hero-bottom p,.about p,dialog p,.contact p,.headline-line,.about h2 span,.project,.motion-ready .project,.farms .card-footer,.arch,.plot{transition:none}}
+
+:root{--agri-card:#e2e7c8;--agri-ink:#35462d;--home-card:#dde8e9;--home-ink:#34515b}:root[data-theme="dark"]{--agri-card:#303b22;--agri-ink:#e4edcc;--home-card:#22383f;--home-ink:#d9ebed}

@@ -6,7 +6,7 @@ Default branch: main
 ## Visitor experience
 
 1. Introduction with name and a project-grounded statement.
-2. Asymmetric bento grid with Bizrail Africa, Twin Palm, Outgrower OS, and Masona Farms.
+2. Asymmetric bento grid with Bizrail Africa, Twin Palm, Outgrower OS, Masona Farms, Agritech Link, and Kwena Homes.
 3. Project details explaining the problem, implemented approach, technology, and development status.
 4. About section based on verified projects.
 5. GitHub contact link.

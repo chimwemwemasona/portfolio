@@ -110,6 +110,9 @@
  cards.forEach(card=>makeSpring(card,'card'));
  document.querySelectorAll('.round-link,.contact>div>a').forEach(element=>makeSpring(element,'magnet'));
  const revealIllustration=card=>{
+  card.querySelectorAll('.agri-node').forEach((node,i)=>animate(node,[{opacity:0,transform:'translateY(25px)'},{opacity:1,transform:'translateY(0)'}],{duration:1100,delay:250+i*120,easing:ease,fill:'backwards'}));
+  card.querySelectorAll('.network-path').forEach(path=>animate(path,[{strokeDashoffset:70,opacity:0},{strokeDashoffset:0,opacity:1}],{duration:1600,delay:300,easing:ease,fill:'backwards'}));
+  card.querySelectorAll('.building').forEach((building,i)=>animate(building,[{transform:'translateY(100%) skewY(-5deg)',opacity:0},{transform:'translateY(0) skewY(-5deg)',opacity:1}],{duration:1300,delay:200+i*180,easing:ease,fill:'backwards'}));
   card.querySelectorAll('.bar').forEach((bar,i)=>animate(bar,[{transform:'scaleY(.08)'},{transform:'scaleY(1)'}],{duration:1000,delay:400+i*75,easing:ease,fill:'backwards'}));
   const phone=card.querySelector('.phone');
   animate(phone,[{transform:'translate3d(0,80px,0) rotate(20deg)'},{transform:'translate3d(0,0,0) rotate(7deg)'}],{duration:1400,delay:150,easing:ease,fill:'backwards'});

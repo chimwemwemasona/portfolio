@@ -16,6 +16,9 @@ A responsive editorial bento grid with an ivory background, oversized typography
 - Outgrower OS: a prototype for smallholder farming production and procurement workflows. Source remains private.
 - Masona Farms: a React Native Android farm-management app with SQLite records. Source remains private.
 
+- Agritech Link: a Flutter/Dart farmer-focused app with a Supabase-backed produce marketplace and crop-analysis workflows. https://github.com/agritech-link/app_v1
+- Kwena Homes: work on a React Native/Expo property-discovery app with maps, saved homes, and listing workflows. https://github.com/Nile-Living/kwena_homes_mobile
+
 ## Milestones
 
 - [x] Verify GitHub access and project descriptions.
