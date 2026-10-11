@@ -12,7 +12,7 @@ A responsive editorial bento grid with an ivory background, oversized typography
 ## Selected work
 
 - Bizrail Africa: an offline-first SME workspace using Next.js, NestJS, and PostgreSQL. https://github.com/chimwemwemasona/Bizrail_Africa
-- Twin Palm website: React, TypeScript, Vite, shadcn/ui, and Tailwind CSS. https://github.com/chimwemwemasona/tpbc_prod
+- Twin Palm website and CMS: React, TypeScript, Vite, shadcn/ui, and Tailwind CSS. Live website: http://95.217.214.201/. Repository: https://github.com/chimwemwemasona/tpbc_prod
 - Outgrower OS: a prototype for smallholder farming production and procurement workflows. Source remains private.
 - Masona Farms: a React Native Android farm-management app with SQLite records. Source remains private.
 
