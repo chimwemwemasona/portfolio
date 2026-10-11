@@ -20,10 +20,23 @@ A responsive editorial bento grid with an ivory background, oversized typography
 
 - [x] Verify GitHub access and project descriptions.
 - [x] Prepare the repository foundation and design plan.
-- [ ] Create the personal portfolio repository and push the foundation.
-- [ ] Implement responsive bento layouts and project details.
-- [ ] Add verified project visuals.
+- [x] Create the personal portfolio repository and push the foundation.
+- [x] Implement responsive bento layouts and project details.
+- [x] Add original interface illustrations, labeled as concepts.
 - [ ] Verify accessibility and desktop/mobile behavior.
 - [ ] Publish the completed site.
 
 Commit meaningful milestones as the website is built. Never commit credentials, private project source, or private business data. Do not invent testimonials, usage figures, employment history, or production-readiness claims.
+
+## Preview locally
+
+This is a buildless HTML/CSS/JavaScript site in dist. No dependency installation is needed.
+
+From this repository, run: python -m http.server 4173 --bind 127.0.0.1 --directory dist
+
+Open http://127.0.0.1:4173 in a browser. The project cards open detail dialogs; Escape closes them. Native dialog focus management, keyboard access, and reduced-motion styles are included.
+
+## Verification
+
+JavaScript syntax and static asset/anchor checks have passed. Browser-based visual and interaction verification is pending because no browser is connected. The interface illustrations are concepts, not screenshots or production metrics.
+
