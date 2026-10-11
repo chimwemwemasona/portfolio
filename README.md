@@ -69,4 +69,4 @@ Live at https://95.217.214.201/. HTTP on port 8081 redirects to HTTPS. A separat
 
 ## CI/CD
 
-GitHub Actions validates pull requests and deploys successful pushes to main through a restricted SSH key, with checksum verification, atomic release activation, and rollback. Set the one-time `PORTFOLIO_DEPLOY_KEY` Actions secret to activate deployment. See [docs/CI_CD.md](docs/CI_CD.md).
+GitHub Actions validates pull requests and deploys successful pushes to main through a restricted SSH key, with checksum verification, atomic release activation, and rollback. The dedicated `PORTFOLIO_DEPLOY_KEY` secret is configured, and an end-to-end Actions deployment has passed. See [docs/CI_CD.md](docs/CI_CD.md).

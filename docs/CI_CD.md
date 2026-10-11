@@ -19,7 +19,7 @@ Use the dedicated private key generated locally at `.cache/github-actions-deploy
 
 After adding the secret, rerun the latest failed deployment job from the Actions tab or manually run the workflow on main. An empty secret makes the deployment job fail with a clear setup message; validation remains independently visible.
 
-The connector available during setup can write source and read/rerun Actions, but cannot create repository Actions secrets. End-to-end Actions success must be confirmed after this secret is added.
+The connector available during setup can write source and read/rerun Actions, but cannot create repository Actions secrets. The secret has now been configured and the deployment job completed successfully.
 
 ## Server-installed handler
 
@@ -32,6 +32,7 @@ Installed at `/home/chimwemwe/apps/chimwemwe-portfolio/server_deploy.py`, outsid
 - Eight deployment-validation tests passed on Ubuntu, including rollback after failed verification and rejection of stale commits.
 - A real archive deployed successfully through the restricted Actions key, with all live files verified.
 - The Actions key was tested and cannot run a general shell command.
-- Actions run status is separate from the server-side deployment test; inspect the workflow run for the final CI/CD result.
+- GitHub Actions run https://github.com/chimwemwemasona/portfolio/actions/runs/38163752389 (attempt 2) passed both validation and deployment. The server manifest independently confirmed deployed commit `6d72eafe697394ae0eeb884cc97231c6eb3e9f7f`.
+- HTTPS content, certificate IP verification, the HTTP redirect, and Twin Palm availability were checked again after the Actions deployment.
 
 Reference: https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets

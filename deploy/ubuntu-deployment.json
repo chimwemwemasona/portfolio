@@ -6,7 +6,7 @@
   "container": "chimwemwe-portfolio",
   "image": "nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94",
   "root": "/home/chimwemwe/apps/chimwemwe-portfolio",
-  "release": "8e35a287cb6f28b3b10802523ba130d98e1c858a",
+  "release": "6d72eafe697394ae0eeb884cc97231c6eb3e9f7f",
   "host_port": 8081,
   "container_port": 8080,
   "deployed_date": "2026-10-11",
@@ -15,5 +15,7 @@
   "https_host_port": 443,
   "https_container_port": 8443,
   "tls_root": "/home/chimwemwe/apps/chimwemwe-portfolio-tls",
-  "certificate_expires": "2027-10-11T18:17:16Z"
+  "certificate_expires": "2027-10-11T18:17:16Z",
+  "verified_actions_run": "https://github.com/chimwemwemasona/portfolio/actions/runs/38163752389",
+  "release_note": "Last independently verified deployment; server deployment.json is authoritative for later releases."
 }
