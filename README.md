@@ -52,3 +52,7 @@ JavaScript syntax and static asset/anchor checks have passed. Browser-based visu
 - System reduced-motion support, including changes while the page is open. Spring frames stop when settled or the page is hidden.
 
 The local server serves the latest files without a build step. Reload the page to see the entrance sequence. JavaScript syntax and static asset checks pass. Automated Chromium verification was attempted but browser launch is blocked by the environment (spawn EPERM); visual and browser interaction checks remain pending.
+
+## Theme
+
+The navigation includes an accessible dark-mode toggle. First visits follow the operating-system preference; an explicit choice is saved in localStorage and applied in the head before styles load. Cross-tab changes are reflected, and unavailable storage falls back to an in-memory choice. A circular theme reveal uses the View Transitions API where available, with a normal color transition elsewhere. Reduced-motion settings skip the animated reveal.
