@@ -14,7 +14,10 @@ document.querySelectorAll('[data-project]').forEach(button=>button.addEventListe
  if(project.source)source.href=project.source;else source.removeAttribute('href');
  document.getElementById('dialog-private').hidden=Boolean(project.source);
  dialog.showModal();
+ window.animatePortfolioProject?.(button);
 }));
-document.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
-dialog.addEventListener('click',event=>{const box=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom))dialog.close();});
+function requestProjectClose(){if(window.closePortfolioProject)window.closePortfolioProject();else dialog.close();}
+document.querySelector('.dialog-close').addEventListener('click',requestProjectClose);
+dialog.addEventListener('cancel',event=>{if(window.closePortfolioProject){event.preventDefault();requestProjectClose();}});
+dialog.addEventListener('click',event=>{const box=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom))requestProjectClose();});
 document.getElementById('year').textContent=new Date().getFullYear();

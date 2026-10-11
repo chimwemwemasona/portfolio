@@ -40,3 +40,15 @@ Open http://127.0.0.1:4173 in a browser. The project cards open detail dialogs; 
 
 JavaScript syntax and static asset/anchor checks have passed. Browser-based visual and interaction verification is pending because no browser is connected. The interface illustrations are concepts, not screenshots or production metrics.
 
+
+## Motion design
+
+- Masked, staggered letter entrance for the main headline.
+- A sculptural orbital mark that rotates with scroll position.
+- Spring-driven project-card tilt, artwork depth, and pointer lighting on fine-pointer devices.
+- Individual illustration sequences for charts, phone, fields, and architectural shapes.
+- Magnetic contact and navigation controls.
+- Origin-aware project-detail entrance and animated dismissal, retaining native dialog focus handling.
+- System reduced-motion support, including changes while the page is open. Spring frames stop when settled or the page is hidden.
+
+The local server serves the latest files without a build step. Reload the page to see the entrance sequence. JavaScript syntax and static asset checks pass. Automated Chromium verification was attempted but browser launch is blocked by the environment (spawn EPERM); visual and browser interaction checks remain pending.
