@@ -30,7 +30,7 @@ All six source repositories are public. Project dialogs retain their individual 
 - [x] Implement responsive bento layouts and project details.
 - [x] Add original interface illustrations, labeled as concepts.
 - [ ] Verify accessibility and desktop/mobile behavior.
-- [ ] Publish the completed site.
+- [x] Publish the site on the Ubuntu server (HTTP, port 8081).
 
 Commit meaningful milestones as the website is built. Never commit credentials, private project source, or private business data. Do not invent testimonials, usage figures, employment history, or production-readiness claims.
 
@@ -65,4 +65,4 @@ The navigation includes an accessible dark-mode toggle. First visits follow the 
 
 ## Ubuntu hosting
 
-Static deployment preparation and verification steps are in [docs/UBUNTU_HOSTING.md](docs/UBUNTU_HOSTING.md). The Nginx example in `deploy/` is a template pending inspection of the existing Twin Palm server and selection of a portfolio hostname.
+Live at http://95.217.214.201:8081/. A separate, automatically restarting Nginx container serves the static files alongside Twin Palm. Deployment details, update steps, and rollback are in [docs/UBUNTU_HOSTING.md](docs/UBUNTU_HOSTING.md). All eight public assets were verified against local SHA-256 checksums. A domain and HTTPS are not configured yet.
