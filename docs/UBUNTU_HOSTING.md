@@ -75,3 +75,9 @@ Certificate/config backups are under `/home/chimwemwe/apps/portfolio-acme/backup
 Content rollback remains independent: atomically restore `current` to the previous recorded release. Keep earlier releases for recovery. Infrastructure/config updates require administrative SSH access and are not applied by the restricted Actions key.
 
 References: https://letsencrypt.org/2026/03/11/shorter-certs-certbot.html and https://eff-certbot.readthedocs.io/en/stable/using.html
+
+## Additional HTTPS services
+
+Bizrail Africa is served separately at https://95.217.214.201:8444/ by `bizrail-africa-proxy`, with the same trusted IP certificate mounted read-only. The renewal helper reads `/home/chimwemwe/apps/portfolio-acme/tls-consumers.json`, an array of `{container, url}` entries. Its current Bizrail entry checks `/healthz`. When a new certificate is activated, both active TLS services validate, reload and undergo normal HTTPS checks. Stopped or absent additional consumers are skipped and read the active pair on their next startup. Remove a service's entry when retiring it permanently.
+
+The hosted app has its own origin, database and Redis volumes; its sample-business scope and operational instructions are in the Bizrail repository's `docs/hosted-demo.md`. The portfolio's card and project detail dialog both link to the public demo.

@@ -16,7 +16,7 @@ Ordered by an editorial assessment of implemented product breadth, completed wor
 1. Kwena Homes: property discovery, maps, saved homes, listing management, authentication, and subscription/promotion screens. React Native/Expo. https://github.com/Nile-Living/kwena_homes_mobile
 2. Twin Palm: public community website and authenticated CMS for sermons, blogs, media, Bible study, and other content. React/TypeScript. Live: http://95.217.214.201/. Source: https://github.com/chimwemwemasona/tpbc_prod
 3. Masona Farms: offline farm records, financial summaries, crop calendar/guidance, photos, notifications, and report exports. React Native/SQLite. https://github.com/chimwemwemasona/Masona-Farms
-4. Bizrail Africa: technically deep Phase 1 SME workspace with offline capture, ledger, inventory, sync, and recovery. Next.js/NestJS/PostgreSQL. https://github.com/chimwemwemasona/Bizrail_Africa
+4. Bizrail Africa: hosted Phase 1 portfolio demo with sample businesses, offline capture, ledger, inventory, sync, and recovery. Next.js/NestJS/PostgreSQL. Live: https://95.217.214.201:8444/. Source: https://github.com/chimwemwemasona/Bizrail_Africa
 5. Agritech Link: produce marketplace, cart/order workflows, crop-analysis integration, and weather services. Flutter/Dart/Supabase. https://github.com/agritech-link/app_v1
 6. Outgrower OS: early production/procurement prototype; later business modules remain planned. React/Go. https://github.com/chimwemwemasona/Outgrower-OS
 

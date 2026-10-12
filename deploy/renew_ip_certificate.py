@@ -16,6 +16,24 @@ IMAGE = 'certbot/certbot@sha256:f70ad0adbb7e117f0fe42a63c553f28ea451edabc0148757
 NGINX_IMAGE = 'nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94'
 IP = '95.217.214.201'
 
+def consumers():
+    result = [(CONTAINER, 'https://' + IP + '/')]
+    extra = STATE / 'tls-consumers.json'
+    if extra.exists():
+        import re
+        from urllib.parse import urlsplit
+        for entry in json.loads(extra.read_text()):
+            name, url = entry['container'], entry['url']
+            parsed = urlsplit(url)
+            if not re.fullmatch(r'[a-z0-9][a-z0-9_.-]{0,63}', name) or parsed.scheme != 'https' or parsed.hostname != IP:
+                raise ValueError('Unexpected TLS consumer')
+            state = subprocess.run(['/usr/bin/docker','inspect','--format','{{.State.Running}}',name],capture_output=True,text=True)
+            if state.returncode or state.stdout.strip() != 'true':
+                print('TLS consumer is stopped or absent; skipping reload: ' + name,flush=True)
+                continue
+            if name not in [item[0] for item in result]: result.append((name, url))
+    return result
+
 def run(cmd):
     result = subprocess.run(cmd, text=True, capture_output=True)
     if result.returncode:
@@ -52,6 +70,7 @@ def activate():
         temp.rename(target)
     active = TLS/'active'
     old_target = os.readlink(active) if active.is_symlink() else None
+    targets = consumers()
     if old_target == 'versions/' + fingerprint:
         print('Active certificate is current; no reload required.', flush=True)
         return
@@ -60,15 +79,18 @@ def activate():
     next_link.symlink_to('versions/' + fingerprint)
     os.replace(next_link,active)
     try:
-        run(['/usr/bin/docker','exec',CONTAINER,'nginx','-t'])
-        run(['/usr/bin/docker','exec',CONTAINER,'nginx','-s','reload'])
+        for name, _url in targets:
+            run(['/usr/bin/docker','exec',name,'nginx','-t'])
+        for name, _url in targets:
+            run(['/usr/bin/docker','exec',name,'nginx','-s','reload'])
         # Verify with the operating system trust store, without a certificate bypass.
         import time
         opener=build_opener(ProxyHandler({}))
         for attempt in range(10):
             try:
-                with opener.open('https://' + IP + '/',timeout=15) as response:
-                    if response.status != 200: raise ValueError('HTTPS health check failed')
+                for _name, url in targets:
+                    with opener.open(url,timeout=15) as response:
+                        if response.status != 200: raise ValueError('HTTPS health check failed')
                 break
             except Exception:
                 if attempt==9: raise
@@ -76,9 +98,10 @@ def activate():
     except Exception:
         if old_target is not None:
             restore=TLS/'active.restore';restore.symlink_to(old_target);os.replace(restore,active)
-            run(['/usr/bin/docker','exec',CONTAINER,'nginx','-s','reload'])
+            for name, _url in targets:
+                run(['/usr/bin/docker','exec',name,'nginx','-s','reload'])
         raise
-    status={'renewed_at':datetime.now(timezone.utc).isoformat(),'fingerprint_sha256':fingerprint,'certificate':run(['openssl','x509','-in',str(lineage/'cert.pem'),'-noout','-issuer','-enddate']).strip()}
+    status={'renewed_at':datetime.now(timezone.utc).isoformat(),'fingerprint_sha256':fingerprint,'tls_consumers':[name for name, _url in targets],'certificate':run(['openssl','x509','-in',str(lineage/'cert.pem'),'-noout','-issuer','-enddate']).strip()}
     (STATE/'certificate-status.json').write_text(json.dumps(status,indent=2))
     print('Trusted certificate activated and HTTPS verified.',flush=True)
 
