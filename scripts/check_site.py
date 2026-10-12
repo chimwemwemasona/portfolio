@@ -23,7 +23,7 @@ def main():
     parser = SiteParser()
     parser.feed((DIST / "index.html").read_text(encoding="utf-8"))
     assert len(parser.ids) == len(set(parser.ids)), "Duplicate HTML IDs"
-    assert parser.projects == ["kwena", "community", "farms", "bizrail", "agritech", "outgrower"], "Unexpected project hierarchy"
+    assert parser.projects == ["kwena", "community", "farms", "bizrail", "agritech", "outgrower", "knot"], "Unexpected project hierarchy"
     app = (DIST / "app.js").read_text(encoding="utf-8")
     for key in parser.projects:
         assert key + ": {" in app, f"Missing project details: {key}"
@@ -40,6 +40,6 @@ def main():
         if file.suffix == ".css":
             css = file.read_text(encoding="utf-8")
             assert css.count("{") == css.count("}"), f"Unbalanced CSS: {file}"
-    print("PASS: HTML anchors/assets, six project details, JS syntax, CSS integrity")
+    print("PASS: HTML anchors/assets, seven project details, JS syntax, CSS integrity")
 
 if __name__ == "__main__": main()
