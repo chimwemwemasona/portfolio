@@ -9,7 +9,7 @@ Pull requests to main run validation only. Pushes to main run validation and dep
 
 The deploy job packages `dist/` with its commit SHA and per-file SHA-256 checksums. It streams the archive over SSH to a restricted server command. No SCP, arbitrary shell, port forwarding, or PTY is permitted for the Actions key. SSH verifies the committed server host key.
 
-The installed `server_deploy.py` rejects unsafe paths, symlinks, duplicate files, oversized archives, and checksum mismatches. It locks deployment, confirms the commit is still GitHub main, writes a versioned release, and atomically switches `current`. It verifies all public HTTPS assets using the self-signed certificate as its trust anchor and checks Twin Palm. Failed verification restores the previous release and fails the Actions job. GitHub concurrency serializes production runs; stale commits are also rejected server-side.
+The installed `server_deploy.py` rejects unsafe paths, symlinks, duplicate files, oversized archives, and checksum mismatches. It locks deployment, confirms the commit is still GitHub main, writes a versioned release, and atomically switches `current`. It verifies all public HTTPS assets using the operating system certificate trust store and checks Twin Palm. Failed verification restores the previous release and fails the Actions job. GitHub concurrency serializes production runs; stale commits are also rejected server-side.
 
 ## Required one-time repository secret
 
@@ -36,3 +36,9 @@ Installed at `/home/chimwemwe/apps/chimwemwe-portfolio/server_deploy.py`, outsid
 - HTTPS content, certificate IP verification, the HTTP redirect, and Twin Palm availability were checked again after the Actions deployment.
 
 Reference: https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets
+
+## Trusted IP certificate renewal
+
+HTTPS uses a publicly trusted Let's Encrypt certificate for `95.217.214.201`. The server independently checks renewal every four hours. The certificate pair is switched atomically and the TLS Nginx container reloads only when a verified new certificate is activated. Infrastructure changes remain administrative operations; a normal Actions content deployment does not touch certificates, ACME account state, or renewal scheduling.
+
+Renewal code: `deploy/renew_ip_certificate.py`. Installed at `/home/chimwemwe/apps/portfolio-acme/renew_ip_certificate.py`. Certbot is pinned to a Docker image digest. Private keys and ACME account state are outside the public site and never enter GitHub artifacts. See [Ubuntu hosting](UBUNTU_HOSTING.md) for commands and recovery.

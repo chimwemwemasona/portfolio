@@ -21,7 +21,7 @@ jobs:
       - name: Test deployment artifact validation
         run: python3 scripts/test_deployment.py
       - name: Validate deployment scripts
-        run: python3 -m py_compile scripts/package_site.py deploy/server_deploy.py
+        run: python3 -m py_compile scripts/package_site.py deploy/server_deploy.py deploy/renew_ip_certificate.py
       - name: Package static site
         run: python3 scripts/package_site.py "$GITHUB_SHA" /tmp/portfolio.tar.gz
   deploy:

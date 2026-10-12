@@ -15,7 +15,13 @@
   "https_host_port": 443,
   "https_container_port": 8443,
   "tls_root": "/home/chimwemwe/apps/chimwemwe-portfolio-tls",
-  "certificate_expires": "2027-10-11T18:17:16Z",
+  "certificate_expires": "2026-10-19T03:40:34Z",
   "verified_actions_run": "https://github.com/chimwemwemasona/portfolio/actions/runs/38163752389",
-  "release_note": "Last independently verified deployment; server deployment.json is authoritative for later releases."
+  "release_note": "Last independently verified deployment; server deployment.json is authoritative for later releases.",
+  "certificate_type": "publicly trusted IP certificate",
+  "certificate_authority": "Let's Encrypt",
+  "certificate_renewal": "user cron every 4 hours",
+  "certificate_state": "/home/chimwemwe/apps/portfolio-acme",
+  "certificate_active_pair": "/home/chimwemwe/apps/chimwemwe-portfolio-tls/active",
+  "certificate_updated_date": "2026-10-12"
 }

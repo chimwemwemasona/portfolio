@@ -4,7 +4,6 @@ import hashlib, io, json, os, re, ssl, sys, tarfile, time
 from urllib.request import build_opener, HTTPSHandler, ProxyHandler, Request
 
 ROOT = Path("/home/chimwemwe/apps/chimwemwe-portfolio")
-CERT = Path("/home/chimwemwe/apps/chimwemwe-portfolio-tls/portfolio.crt")
 URL = "https://95.217.214.201"
 MAX_BYTES = 20 * 1024 * 1024
 
@@ -41,7 +40,7 @@ def point_to(target):
     os.replace(temp, ROOT / "current")
 
 def verify(data):
-    opener = build_opener(ProxyHandler({}), HTTPSHandler(context=ssl.create_default_context(cafile=str(CERT))))
+    opener = build_opener(ProxyHandler({}), HTTPSHandler(context=ssl.create_default_context()))
     for name, expected in data.items():
         from urllib.parse import quote
         with opener.open(URL + "/" + quote(name), timeout=10) as response:

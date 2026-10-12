@@ -65,7 +65,7 @@ The navigation includes an accessible dark-mode toggle. First visits follow the 
 
 ## Ubuntu hosting
 
-Live at https://95.217.214.201/. HTTP on port 8081 redirects to HTTPS. A separate, automatically restarting Nginx container serves the static files alongside Twin Palm. Deployment details, update steps, and rollback are in [docs/UBUNTU_HOSTING.md](docs/UBUNTU_HOSTING.md). All eight public assets were verified against local SHA-256 checksums. The IP certificate is self-signed; browsers require explicit trust. A custom domain is not configured.
+Live at https://95.217.214.201/. HTTP on port 8081 redirects to HTTPS. A separate, automatically restarting Nginx container serves the static files alongside Twin Palm. Deployment details, update steps, and rollback are in [docs/UBUNTU_HOSTING.md](docs/UBUNTU_HOSTING.md). All eight public assets were verified against local SHA-256 checksums. HTTPS uses a publicly trusted Let's Encrypt IP certificate. Renewal is checked automatically every four hours; no domain or manual certificate trust is required.
 
 ## CI/CD
 

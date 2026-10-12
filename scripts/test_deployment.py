@@ -1,6 +1,6 @@
 from pathlib import Path
 import hashlib, importlib.util, io, json, tarfile, unittest, tempfile
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from types import SimpleNamespace
 
 root = Path(__file__).resolve().parents[1]
@@ -39,6 +39,16 @@ class ArtifactTests(unittest.TestCase):
             info.linkname = "/etc/passwd"
             archive.addfile(info)
         with self.assertRaises(ValueError): deployment.unpack(output.getvalue(), SHA)
+
+class VerificationTests(unittest.TestCase):
+    def test_https_uses_system_trust_store(self):
+        response = MagicMock()
+        response.__enter__.return_value.status = 200
+        response.__enter__.return_value.read.return_value = b"portfolio"
+        opener = SimpleNamespace(open=lambda *args, **kwargs: response)
+        with patch.object(deployment.ssl, "create_default_context", wraps=deployment.ssl.create_default_context) as trust, patch.object(deployment, "build_opener", return_value=opener):
+            deployment.verify({"index.html": b"portfolio"})
+            trust.assert_called_once_with()
 
 class ActivationTests(unittest.TestCase):
     def run_case(self, failure, head=SHA):
