@@ -86,16 +86,41 @@
   });
  }
  const orbit=document.createElement('div');orbit.className='hero-orbit';orbit.setAttribute('aria-hidden','true');
- orbit.innerHTML='<div class="orbit-core"><div class="orbit-cross"></div><div class="orbit-ring ring-one"><span class="orbit-traveler"></span></div><div class="orbit-ring ring-two"><span class="orbit-traveler"></span></div><div class="orbit-ring ring-three"><span class="orbit-traveler"></span></div><div class="orbit-center"></div></div>';
+ orbit.innerHTML='<div class="orbit-core"><div class="orbit-cross"></div><div class="orbit-ring ring-one"><span class="orbit-traveler"></span></div><div class="orbit-ring ring-two"><span class="orbit-traveler"></span></div><div class="orbit-ring ring-three"><span class="orbit-traveler"></span></div></div><div class="orbit-center"></div><span class="orbit-planet planet-one"></span><span class="orbit-planet planet-two"></span><span class="orbit-planet planet-three"></span>';
  hero?.append(orbit);
- // Each planet travels in its own tilted plane; scroll still turns the whole system.
- let orbitVisible=true;
- const updateOrbitPlayback=()=>orbit.classList.toggle('orbit-paused',document.hidden||!orbitVisible);
+ // Project orbital positions in 3D, but keep each shaded sphere facing the viewer.
+ let orbitVisible=true,orbitFrame=0,orbitPrevious=0,orbitTime=0;
+ const planets=[...orbit.querySelectorAll('.orbit-planet')];
+ const rings=[...orbit.querySelectorAll('.orbit-ring')];
+ function renderPlanets(){
+  const size=orbit.clientWidth,radius=size*.38,core=new DOMMatrix(getComputedStyle(orbit.querySelector('.orbit-core')).transform);
+  planets.forEach((planet,i)=>{
+   const angle=orbitTime/[18,27,38][i]*Math.PI*2*[1,-1,1][i]+[0,2.1,4][i];
+   const plane=new DOMMatrix(getComputedStyle(rings[i]).transform);
+   const point=core.multiply(plane).transformPoint(new DOMPoint(Math.cos(angle)*radius,Math.sin(angle)*radius,0));
+   const scale=650/(650-point.z);
+   planet.style.transform=`translate3d(${size/2+point.x*scale}px,${size/2+point.y*scale}px,0) translate(-50%,-50%) scale(${scale})`;
+   planet.style.zIndex=point.z>0?'3':'0';
+  });
+ }
+ function orbitTick(time){
+  orbitFrame=0;
+  if(orbitPrevious)orbitTime+=Math.min((time-orbitPrevious)/1000,.05);
+  orbitPrevious=time;renderPlanets();
+  if(!document.hidden&&orbitVisible&&!reduce.matches)orbitFrame=requestAnimationFrame(orbitTick);
+ }
+ function updateOrbitPlayback(){
+  cancelAnimationFrame(orbitFrame);orbitFrame=0;orbitPrevious=0;
+  renderPlanets();
+  if(!document.hidden&&orbitVisible&&!reduce.matches)orbitFrame=requestAnimationFrame(orbitTick);
+ }
  if(hero&&'IntersectionObserver' in window){
   const orbitObserver=new IntersectionObserver(entries=>{orbitVisible=entries[0].isIntersecting;updateOrbitPlayback();});
   orbitObserver.observe(hero);
  }
  document.addEventListener('visibilitychange',updateOrbitPlayback);
+ reduce.addEventListener('change',updateOrbitPlayback);
+ addEventListener('resize',renderPlanets,{passive:true});
  updateOrbitPlayback();
  animate(orbit,[{opacity:0,transform:'scale(.7) rotate(-45deg)'},{opacity:getComputedStyle(orbit).opacity,transform:'scale(1) rotate(0deg)'}],{duration:1800,delay:550,easing:ease,fill:'backwards'});
  const progress=document.createElement('div');progress.className='scroll-progress';progress.setAttribute('aria-hidden','true');document.body.append(progress);
