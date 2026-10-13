@@ -86,8 +86,17 @@
   });
  }
  const orbit=document.createElement('div');orbit.className='hero-orbit';orbit.setAttribute('aria-hidden','true');
- orbit.innerHTML='<div class="orbit-core"><div class="orbit-cross"></div><div class="orbit-ring ring-one"></div><div class="orbit-ring ring-two"></div><div class="orbit-ring ring-three"></div><div class="orbit-center"></div></div>';
+ orbit.innerHTML='<div class="orbit-core"><div class="orbit-cross"></div><div class="orbit-ring ring-one"><span class="orbit-traveler"></span></div><div class="orbit-ring ring-two"><span class="orbit-traveler"></span></div><div class="orbit-ring ring-three"><span class="orbit-traveler"></span></div><div class="orbit-center"></div></div>';
  hero?.append(orbit);
+ // Each planet travels in its own tilted plane; scroll still turns the whole system.
+ let orbitVisible=true;
+ const updateOrbitPlayback=()=>orbit.classList.toggle('orbit-paused',document.hidden||!orbitVisible);
+ if(hero&&'IntersectionObserver' in window){
+  const orbitObserver=new IntersectionObserver(entries=>{orbitVisible=entries[0].isIntersecting;updateOrbitPlayback();});
+  orbitObserver.observe(hero);
+ }
+ document.addEventListener('visibilitychange',updateOrbitPlayback);
+ updateOrbitPlayback();
  animate(orbit,[{opacity:0,transform:'scale(.7) rotate(-45deg)'},{opacity:getComputedStyle(orbit).opacity,transform:'scale(1) rotate(0deg)'}],{duration:1800,delay:550,easing:ease,fill:'backwards'});
  const progress=document.createElement('div');progress.className='scroll-progress';progress.setAttribute('aria-hidden','true');document.body.append(progress);
  function updateScroll(){
